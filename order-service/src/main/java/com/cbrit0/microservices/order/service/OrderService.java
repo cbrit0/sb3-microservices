@@ -22,6 +22,7 @@ public class OrderService {
     private final KafkaTemplate<String, OrderPlacedEvent> kafkaTemplate;
 
     public void placeOrder(OrderRequest orderRequest) {
+        log.info("Start - Placing order for sku code: {}, quantity: {}", orderRequest.skuCode(), orderRequest.quantity());
         var isProductInStock = inventoryClient.isInStock(orderRequest.skuCode(), orderRequest.quantity());
 
         if (isProductInStock) {
